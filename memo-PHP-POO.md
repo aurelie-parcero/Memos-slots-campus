@@ -1,6 +1,6 @@
-#Memo - Programmation orientée objet en PHP
+# Memo - Programmation orientée objet en PHP
 
-###Classe
+### Classe
 C'est un ensemble de variables et de fonctions (attributs et méthodes).
 Le nom des classes commence par une majuscule. Il s'agit de la notation PEAR, il est fortement conseillé de la respecter!.
 ```
@@ -9,7 +9,7 @@ class Personnage {      // mot-clé "class" suivi du nom de la classe
 } 
 ```
 
-###Objet
+### Objet
 C'est une <b>instance</b> de la classe à utiliser.
 Pour créer un nouvel objet, il faut faire précéder le nom de la classe à <b>instancier</b> du mot-clé ``new``:
 
@@ -18,7 +18,7 @@ $perso = new Personnage;
 ```
 Ainsi, ``$perso`` sera un objet de type ``Personnage``. On dit que l'on <b>instancie</b> la classe ``Personnage``, que l'on crée une <b>instance</b> de la classe ``Personnage``.
 
-###Attributs
+### Attributs
 Il s'agit d'une variable. Il est possible ou non de les initialiser lors de leur déclaration.
 Ils sont toujours(?) privés (alors que la méthode pourra être privée ou publique), c'est ce qu'on appelle <b>l'encapsulation</b>.
 ```
@@ -30,7 +30,7 @@ private $_degats;
 La valeur donnée par défaut doit être une expression scalaire statique. Par conséquent, leur valeur ne peut par exemple pas être issue d'un appel à une fonction ( ``private $_attribut = strlen('azerty')`` ) ou d'une variable, superglobale ou non ( ``private $_attribut = $_SERVER['REQUEST_URI']`` ).
 
 
-###Méthodes
+### Méthodes
 Il s'agit des fonctions utilisées pour une même classe.
 Elle est précédée du mot-clé ``function`` et de la visibilité de la méthode. Les types de visibilité des méthodes sont les mêmes que les attributs. Les méthodes n'ont en général pas besoin d'être masquées à l'utilisateur, le plus souvent elles seront en ``public`` (à moins qu'on tienne absolument à ce que l'utilisateur ne puisse pas appeler cette méthode, par exemple s'il s'agit d'une fonction qui simplifie certaines tâches sur l'objet mais qui ne doit pas être appelée n'importe comment).
 ```
@@ -120,7 +120,7 @@ class Personnage
 Grâce à ça, on est sûrs que la méthode ``frapper()`` ne sera exécutée que si le paramètre passé est de type ``Personnage``, sinon PHP interrompt tout le script. On peut donc appeler les méthodes de l'objet sans crainte qu'un autre type de variable soit passé en paramètre.
 
 
-- ####Les méthodes statiques
+- #### Les méthodes statiques
 
 Les méthodes statiques sont des méthodes qui sont faites pour agir sur une classe et non sur un objet.
 
@@ -138,7 +138,7 @@ Et dans le code:
 Personnage::parler();
 ````
 
-- ####Les attributs statiques
+- #### Les attributs statiques
 
 Le principe est le même, c'est-à-dire qu'un attribut statique appartient à la classe et non à un objet. Ainsi, tous les objets auront accès à cet attribut et cet attribut aura la même valeur pour tous les objets.
 
@@ -150,7 +150,7 @@ La déclaration d'un attribut statique se fait en faisant précéder son nom du 
 ```
 
 
-###Public / Private
+### Public / Private
 Si un attribut ou une méthode est ``public``, alors on pourra y avoir accès depuis n'importe où, depuis l'intérieur de l'objet (dans les méthodes qu'on a créées), comme depuis l'extérieur.
  
 S'il est `` private``, il y a quelques restrictions. On aura accès aux attributs et méthodes seulement depuis l'intérieur de la classe, c'est-à-dire que seul le code voulant accéder à un attribut privé ou une méthode privée écrit(e) à l'intérieur de la classe fonctionnera.
@@ -163,7 +163,7 @@ private $_localisation;
 ```
 Les attributs respectent la notation PEAR, qui dit que chaque nom d'élément privé (attributs ou méthodes) doit être précédé d'un underscore.
 
-###Accesseurs (ou getters)
+### Accesseurs (ou getters)
 
 C'est une méthode dont le rôle est de renvoyer l'attribut qu'on lui demande. Par convention, ces méthodes portent le même nom que l'attribut dont elles renvoient la valeur.
 ```
@@ -193,7 +193,7 @@ class Personnage
 }
 ```
 
-###Mutateurs (ou setters)
+### Mutateurs (ou setters)
 
 Méthode permettant de modifier un attribut. Ces méthodes sont de la forme ``setNomDeLAttribut()``:
 
@@ -235,7 +235,7 @@ Méthode permettant de modifier un attribut. Ces méthodes sont de la forme ``se
   }
 ```
 
-###Constructeur
+### Constructeur
 
 C'est une méthode écrite dans la classe, qui d'initialiser les attributs dès la création de l'objet.
 
@@ -261,7 +261,7 @@ Dans le constructeur, les valeurs sont initialisées en appelant les mutateurs c
 
 On ne met jamais la méthode ``__construct`` avec le type de visibilité ``private`` car elle ne pourra jamais être appelée, one ne pourra donc pas instancier notre classe !
 
-###Scope Resolution Operator (opérateur de résolution de portée) "::"
+### Scope Resolution Operator ``::``
 
 Il est utilisé pour appeler des éléments appartenant à telle classe et non à tel objet. En effet, nous pouvons définir des attributs et méthodes appartenant à la classe : ce sont des éléments statiques.
 
@@ -370,7 +370,8 @@ A noter que les constantes se notent en majuscules.
 
 
 
-###L'hydratation
+### L'hydratation
+
 L'hydratation est un point essentiel dans le domaine de la POO, notamment lorsqu'on utilise des objets représentant des données stockées. 
 
 Quand on vous parle d'hydratation, c'est qu'on parle d'« objet à hydrater ». Hydrater un objet, c'est tout simplement lui apporter ce dont il a besoin pour fonctionner. En d'autres termes plus précis, hydrater un objet revient à lui fournir des données correspondant à ses attributs pour qu'il assigne les valeurs souhaitées à ces derniers. L'objet aura ainsi des attributs valides et sera en lui-même valide. On dit que l'objet a ainsi été hydraté.
@@ -402,16 +403,301 @@ L'opérateur « -> » permet d'accéder à un élément de tel objet
 L'opérateur « :: » permet d'accéder à un élément de telle classe.
 
 
-##Bonnes pratiques
-###L'auto-chargement des classes
+
+### Interface
+
+Techniquement, une interface est une classe entièrement abstraite. Son rôle est de décrire un comportement à notre objet.
+Une interface se déclare avec le mot-clé ``interface``, suivi du nom de l'interface, suivi d'une paire d'accolades:
+
+```
+interface Movable
+{
+  public function move($dest);
+}
+```
+
+Exemple: une voiture et un personnage n'ont pas de raison d'hériter d'une même classe, par contre, les deux doivent avoir la possibilité de se déplacer, donc on peut créer une interface représentant ce point commun.  
+
+
+* Toutes les méthodes présentes dans une interface doivent être publiques.
+
+* Une interface ne peut pas lister de méthodes abstraites ou finales.
+
+* Une interface ne peut pas avoir le même nom qu'une classe et vice-versa.
+
+
+Il faut ensuite implémenter l'interface à la classe avec le mot-clé ``implements`` (c'est un peu comme faire hériter une classe d'une autre):
+
+```
+class Personnage implements Movable
+{
+
+}
+```
+
+Puis il faut alors obligatoirement implémenter les méthodes de l'interface dans la classe qui utilise l'interface (la méthode peut alors être abstraite ou finale dans la classe).
+
+On peut implémenter plus d'une interface par classe, à condition qu'elles n'aient aucune méthode portant le même nom.
+
+```
+interface iA
+{
+  public function test1();
+}
+
+interface iB
+{
+  public function test2();
+}
+
+class A implements iA, iB
+{
+  // Pour ne générer aucune erreur, il va falloir écrire les méthodes de iA et de iB.
+  
+  public function test1()
+  {
+  
+  }
+  
+  public function test2()
+  {
+  
+  }
+}
+```
+
+
+* Les constantes d'interface
+
+   Elles fonctionnent exactement comme les constantes de classes. Elles ne peuvent être écrasées par des classes qui implémentent l'interface. 
+   
+   ```
+  interface iInterface
+  {
+    const MA_CONSTANTE = 'Hello !';
+  }
+  
+  echo iInterface::MA_CONSTANTE; // Affiche Hello !
+  
+  class MaClasse implements iInterface
+  {
+  
+  }
+  
+  echo MaClasse::MA_CONSTANTE; // Affiche Hello !
+  ```
+  
+  * Héritage d'interface
+  
+  Comme pour les classes, on peut faire hériter une interface d'une autre avec le mot-clé ``extands``.
+  
+  Par contre, on ne peut réécrire ni une méthode ni une constante qui a déjà été listée dans l'interface parente.
+  
+  
+  Contrairement aux classes, les interfaces peuvent hériter de plusieurs interfaces à la fois. Il suffit de séparer leur nom par une virgule.
+  
+```
+interface iA
+{
+  public function test1();
+}
+
+interface iB
+{
+  public function test2();
+}
+
+interface iC extends iA, iB
+{
+  public function test3();
+}
+```
+
+Dans cet exemple, si on imagine une classe implémentant iC, celle-ci devra implémenter les trois méthodes ``test1``,``test2`` et ``test3``.
+
+
+* Interfaces prédéfinies
+
+Il existe beaucoup d'interfaces prédéfinies. En voici quelques unes:
+
+### ``Iterator``
+
+Si notre classe implémente cette interface, on pourra modifier le comportement de notre objet lorsqu'il est parcouru. Cette interface comporte 5 méthodes:
+
+``current``: renvoie l'élément coourant.
+``key``: retourne la clé de l'élément courant.
+``next``: déplace le pointeur sur l'élément suivant.
+``rewind``: remet le pointeur sur le premier élément.
+``valid``: vérifie si la position courante est valide.
+
+C'est très pratique pour parcourir les attributs qui sont des tableaux, car on va pouvoirrenvoyer la valeur qu'on veut. Exemple:
+
+````
+class MaClasse implements Iterator
+{
+  private $position = 0;
+  private $tableau = ['Premier élément', 'Deuxième élément', 'Troisième élément', 'Quatrième élément', 'Cinquième élément'];
+  
+  /**
+   * Retourne l'élément courant du tableau.
+   */
+  public function current()
+  {
+    return $this->tableau[$this->position];
+  }
+  
+  /**
+   * Retourne la clé actuelle (c'est la même que la position dans notre cas).
+   */
+  public function key()
+  {
+    return $this->position;
+  }
+  
+  /**
+   * Déplace le curseur vers l'élément suivant.
+   */
+  public function next()
+  {
+    $this->position++;
+  }
+  
+  /**
+   * Remet la position du curseur à 0.
+   */
+  public function rewind()
+  {
+    $this->position = 0;
+  }
+  
+  /**
+   * Permet de tester si la position actuelle est valide.
+   */
+  public function valid()
+  {
+    return isset($this->tableau[$this->position]);
+  }
+}
+
+$objet = new MaClasse;
+
+foreach ($objet as $key => $value)
+{
+  echo $key, ' => ', $value, '<br />';
+}
+````
+
+### ``SeekableIterator``
+
+Cette interface hérite de l'interface ``Iterator``, on n'aura donc pas besoin d'implémenter les deux à notre classe.
+Elle ajoute une méthode à la listedes méthodes ``Iterator``: la méthode ``seek``, qui permet de placer le curseur interne à une position précise (elle demande donc un argument).
+
+```
+class MaClasse implements SeekableIterator
+{
+  private $position = 0;
+  private $tableau = ['Premier élément', 'Deuxième élément', 'Troisième élément', 'Quatrième élément', 'Cinquième élément'];
+  
+  // Retourne l'élément courant du tableau.
+
+  public function current()
+  {
+    return $this->tableau[$this->position];
+  }
+  
+
+   // Retourne la clé actuelle (c'est la même que la position dans notre cas).
+
+  public function key()
+  {
+    return $this->position;
+  }
+  
+
+   // Déplace le curseur vers l'élément suivant.
+
+  public function next()
+  {
+    $this->position++;
+  }
+  
+
+   // Remet la position du curseur à 0.
+
+  public function rewind()
+  {
+    $this->position = 0;
+  }
+  
+
+   // Déplace le curseur interne.
+
+  public function seek($position)
+  {
+    $anciennePosition = $this->position;
+    $this->position = $position;
+    
+    if (!$this->valid())
+    {
+      trigger_error('La position spécifiée n\'est pas valide', E_USER_WARNING);
+      $this->position = $anciennePosition;
+    }
+  }
+  
+
+   // Permet de tester si la position actuelle est valide.
+
+  public function valid()
+  {
+    return isset($this->tableau[$this->position]);
+  }
+}
+
+$objet = new MaClasse;
+
+foreach ($objet as $key => $value)
+{
+  echo $key, ' => ', $value, '<br />';
+}
+
+$objet->seek(2);
+echo '<br />', $objet->current();
+```
+
+
+### ``ArrayAccess``
+
+Permet de placer les crochets à la suite de l'objet, avec la clé à laquelle accéder. Il y a 4 méthodes:
+
+``offsetExists``: vérifie l'existence de la clé entre crochets lorsque l'objet est passé à la fonction ``isset`` ou ``empty``;
+``offsetGet``: on fait ``$obj['clé]``, la valeur 'clé' est donc passée à la méthode ``offsetGet``.
+``offsetSet``: méthode appelée lorsqu'on assigne une valeur à une entrée. Cette méthode reçoit donc deux arguments, la valeur de la clé et la valeur qu'on veut lui assigner.
+``offsetUnset``: appelée lorsqu'on appelle la fonction ``unset`` sur l'objet avec la valeur entre crochets. Cette méthode reçoit un argument, la valeur qui est mise entre les crochets.
+
+### ``Countable``
+
+Elle contient une méthode :``count``
+Celle-ci doit obligatoirement renvoyer un entier. Elle sert à renvoyer le nombre d'netrées dans notre tableau.
+
+```
+public function count()
+  {
+    return count($this->tableau);
+  }
+```
+
+
+## Bonnes pratiques
+
+### L'auto-chargement des classes
 
 Pour une question d'organisation, il vaut mieux créer un fichier par classe. Par exemple, nommer le fichier Maclasse.php et on place la classe dedans. Ensuite, il suffit d'inclure le fichier:
 
-````
+```
 require 'MaClasse.php'; // J'inclus la classe.
 
 $objet = new MaClasse; // Puis, seulement après, je me sers de ma classe.
-````
+```
 
 Puis, pour éviter de les inclure une par une, on utilise l'auto-chargement des classes, c'est-à-dire qu'on crée dans le fichier principal (celui où on crée une instance de notre classe) une ou plusieurs fonctions qui charge(nt) le fichier déclarant la classe:
 
