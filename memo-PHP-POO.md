@@ -2,7 +2,7 @@
 
 ### Classe
 C'est un ensemble de variables et de fonctions (attributs et méthodes).
-Le nom des classes commence par une majuscule. Il s'agit de la notation PEAR, il est fortement conseillé de la respecter!.
+Le nom des classes commence par une majuscule.
 ```
 class Personnage {      // mot-clé "class" suivi du nom de la classe
 //déclaration des attributs et méthodes ici
@@ -20,15 +20,13 @@ Ainsi, ``$perso`` sera un objet de type ``Personnage``. On dit que l'on <b>insta
 
 ### Attributs
 Il s'agit d'une variable. Il est possible ou non de les initialiser lors de leur déclaration.
-Ils sont toujours(?) privés (alors que la méthode pourra être privée ou publique), c'est ce qu'on appelle <b>l'encapsulation</b>.
+
 ```
 class Personnage {
-private $_force = 50;
-private $_degats;
+private $force = 50;
+private $degats;
 }
 ```
-La valeur donnée par défaut doit être une expression scalaire statique. Par conséquent, leur valeur ne peut par exemple pas être issue d'un appel à une fonction ( ``private $_attribut = strlen('azerty')`` ) ou d'une variable, superglobale ou non ( ``private $_attribut = $_SERVER['REQUEST_URI']`` ).
-
 
 ### Méthodes
 Il s'agit des fonctions utilisées pour une même classe.
@@ -36,8 +34,8 @@ Elle est précédée du mot-clé ``function`` et de la visibilité de la méthod
 ```
 class Personnage
 {
-  private $_force;        
-  private $_localisation; 
+  private $force;        
+  private $localisation; 
         
   public function deplacer() // Une méthode qui déplacera le personnage (modifiera sa localisation).
   {
@@ -51,8 +49,8 @@ Pour appeler une méthode d'un objet, il va falloir utiliser un opérateur : il 
 
 ```
 class Personnage {
-private $_force;
-private $_localisation;
+private $force;
+private $localisation;
 
 // Nous déclarons une méthode dont le seul but est d'afficher un texte.
 public fonction parler() {
@@ -74,11 +72,11 @@ Elle permet au sein d'une méthode d'attribuer implicitement un paramètre. Comm
 ```
 class Personnage
 {
-  private $_experience = 50;
+  private $experience = 50;
 
   public function afficherExperience()
   {
-    echo $this->_experience;
+    echo $this->experience;
   }
 }
 
@@ -104,7 +102,7 @@ public function frapper($persoAFrapper)
 $perso1->frapper($perso2);
 ```
 
-Pour s'assurer que l'on passe bien en paramètre un objet et éviter ainsi les erreurs, il suffit de préciser dans les parenthèses le nom de la classe:
+Pour s'assurer que l'on passe bien en paramètre un objet et éviter ainsi les erreurs, il suffit de préciser dans les parenthèses le nom de la classe (typer la valeur):
 
 ```
 class Personnage
@@ -146,7 +144,7 @@ La déclaration d'un attribut statique se fait en faisant précéder son nom du 
 
  ```
 // Variable statique PRIVÉE.
-  private static $_texteADire = 'Je vais tous vous tuer !';
+  private static $texteADire = 'Je vais tous vous tuer !';
 ```
 
 
@@ -157,38 +155,30 @@ S'il est `` private``, il y a quelques restrictions. On aura accès aux attribut
 
 ```
 class Personnage {
-private $_force;        //On définit les attributs qui ne seront utilisables qu'à l'intérieur de la classe
-private $_localisation;
+private $force;        //On définit les attributs qui ne seront utilisables qu'à l'intérieur de la classe
+private $localisation;
 }
 ```
-Les attributs respectent la notation PEAR, qui dit que chaque nom d'élément privé (attributs ou méthodes) doit être précédé d'un underscore.
 
 ### Accesseurs (ou getters)
 
-C'est une méthode dont le rôle est de renvoyer l'attribut qu'on lui demande. Par convention, ces méthodes portent le même nom que l'attribut dont elles renvoient la valeur.
+C'est une méthode dont le rôle est de renvoyer l'attribut qu'on lui demande.
 ```
 class Personnage
 {
-  private $_force;
-  private $_experience;
-  private $_degats;
+  private $force;
+  private $degats;
         
-  // Ceci est la méthode degats() : elle se charge de renvoyer le contenu de l'attribut $_degats.
-  public function degats()
+  // Ceci est la méthode getDegats() : elle se charge de renvoyer le contenu de l'attribut $degats.
+  public function getDegats()
   {
-    return $this->_degats;
+    return $this->degats;
   }
         
-  // Ceci est la méthode force() : elle se charge de renvoyer le contenu de l'attribut $_force.
-  public function force()
+  // Ceci est la méthode getForce() : elle se charge de renvoyer le contenu de l'attribut $force.
+  public function getForce()
   {
-    return $this->_force;
-  }
-        
-  // Ceci est la méthode experience() : elle se charge de renvoyer le contenu de l'attribut $_experience.
-  public function experience()
-  {
-    return $this->_experience;
+    return $this->force;
   }
 }
 ```
@@ -198,7 +188,7 @@ class Personnage
 Méthode permettant de modifier un attribut. Ces méthodes sont de la forme ``setNomDeLAttribut()``:
 
 ```
-// Mutateur chargé de modifier l'attribut $_force.
+// Mutateur chargé de modifier l'attribut $force.
   public function setForce($force)
   {
     if (!is_int($force)) // S'il ne s'agit pas d'un nombre entier.
@@ -213,31 +203,13 @@ Méthode permettant de modifier un attribut. Ces méthodes sont de la forme ``se
       return;
     }
     
-    $this->_force = $force;
-  }
-  
-  // Mutateur chargé de modifier l'attribut $_experience.
-  public function setExperience($experience)
-  {
-    if (!is_int($experience)) // S'il ne s'agit pas d'un nombre entier.
-    {
-      trigger_error('L\'expérience d\'un personnage doit être un nombre entier', E_USER_WARNING);
-      return;
-    }
-    
-    if ($experience > 100) // On vérifie bien qu'on ne souhaite pas assigner une valeur supérieure à 100.
-    {
-      trigger_error('L\'expérience d\'un personnage ne peut dépasser 100', E_USER_WARNING);
-      return;
-    }
-    
-    $this->_experience = $experience;
+    $this->force = $force;
   }
 ```
 
 ### Constructeur
 
-C'est une méthode écrite dans la classe, qui d'initialiser les attributs dès la création de l'objet.
+C'est une méthode écrite dans la classe, qui permet d'initialiser les attributs dès la création de l'objet.
 
 Il s'écrit comme ceci: ``__construct`` avec deux underscore au début.
 
@@ -261,6 +233,7 @@ Dans le constructeur, les valeurs sont initialisées en appelant les mutateurs c
 
 On ne met jamais la méthode ``__construct`` avec le type de visibilité ``private`` car elle ne pourra jamais être appelée, one ne pourra donc pas instancier notre classe !
 
+
 ### Scope Resolution Operator ``::``
 
 Il est utilisé pour appeler des éléments appartenant à telle classe et non à tel objet. En effet, nous pouvons définir des attributs et méthodes appartenant à la classe : ce sont des éléments statiques.
@@ -276,11 +249,8 @@ Pour déclarer une constante, il faut faire précéder son nom du mot-clé ``con
 class Personnage
 {
   // Tous les attributs en privé !
-  private $_force;
-  private $_localisation;
-  private $_experience;
-  private $_degats;
-
+  private $force;
+  private $localisation;
 
   // Déclarations des constantes en rapport avec la force.
   const FORCE_PETITE = 20;
@@ -315,17 +285,15 @@ Pour accéder à une constante, il faut spécifier le nom de la classe, suivi du
 ````
 class Personnage
 {
-  private $_force;
-  private $_localisation;
-  private $_experience;
-  private $_degats;
+  private $force;
+  private $localisation;
+  private $experience;
 
 
   // Déclarations des constantes en rapport avec la force.
   const FORCE_PETITE = 20;
   const FORCE_MOYENNE = 50;
   const FORCE_GRANDE = 80;
-
 
   public function __construct($forceInitiale)
   {
@@ -353,7 +321,7 @@ class Personnage
     // On vérifie qu'on nous donne bien soit une « FORCE_PETITE », soit une « FORCE_MOYENNE », soit une « FORCE_GRANDE ».
     if (in_array($force, [self::FORCE_PETITE, self::FORCE_MOYENNE, self::FORCE_GRANDE]))
     {
-      $this->_force = $force;
+      $this->force = $force;
     }
   }
 }
@@ -372,11 +340,10 @@ A noter que les constantes se notent en majuscules.
 
 ### L'hydratation
 
-L'hydratation est un point essentiel dans le domaine de la POO, notamment lorsqu'on utilise des objets représentant des données stockées. 
-
-Quand on vous parle d'hydratation, c'est qu'on parle d'« objet à hydrater ». Hydrater un objet, c'est tout simplement lui apporter ce dont il a besoin pour fonctionner. En d'autres termes plus précis, hydrater un objet revient à lui fournir des données correspondant à ses attributs pour qu'il assigne les valeurs souhaitées à ces derniers. L'objet aura ainsi des attributs valides et sera en lui-même valide. On dit que l'objet a ainsi été hydraté.
+Quand on parle d'hydratation, c'est qu'on parle d'« objet à hydrater ». Hydrater un objet, c'est tout simplement lui apporter ce dont il a besoin pour fonctionner. En d'autres termes plus précis, hydrater un objet revient à lui fournir des données correspondant à ses attributs pour qu'il assigne les valeurs souhaitées à ces derniers. L'objet aura ainsi des attributs valides et sera en lui-même valide. On dit que l'objet a ainsi été hydraté.
 
 On peut donc écrire une fonction ``hydrate()``:
+
 ````
 // Un tableau de données doit être passé à la fonction (d'où le préfixe « array »).
   public function hydrate(array $donnees)
@@ -395,14 +362,6 @@ On peut donc écrire une fonction ``hydrate()``:
     }
   }
 ````
-
-## Résumé "opérateurs"
-
-L'opérateur « -> » permet d'accéder à un élément de tel objet
-
-L'opérateur « :: » permet d'accéder à un élément de telle classe.
-
-
 
 ### Interface
 
@@ -516,179 +475,6 @@ interface iC extends iA, iB
 Dans cet exemple, si on imagine une classe implémentant iC, celle-ci devra implémenter les trois méthodes ``test1``,``test2`` et ``test3``.
 
 
-* Interfaces prédéfinies
-
-Il existe beaucoup d'interfaces prédéfinies. En voici quelques unes:
-
-### ``Iterator``
-
-Si notre classe implémente cette interface, on pourra modifier le comportement de notre objet lorsqu'il est parcouru. Cette interface comporte 5 méthodes:
-
-``current``: renvoie l'élément coourant.
-``key``: retourne la clé de l'élément courant.
-``next``: déplace le pointeur sur l'élément suivant.
-``rewind``: remet le pointeur sur le premier élément.
-``valid``: vérifie si la position courante est valide.
-
-C'est très pratique pour parcourir les attributs qui sont des tableaux, car on va pouvoirrenvoyer la valeur qu'on veut. Exemple:
-
-````
-class MaClasse implements Iterator
-{
-  private $position = 0;
-  private $tableau = ['Premier élément', 'Deuxième élément', 'Troisième élément', 'Quatrième élément', 'Cinquième élément'];
-  
-  /**
-   * Retourne l'élément courant du tableau.
-   */
-  public function current()
-  {
-    return $this->tableau[$this->position];
-  }
-  
-  /**
-   * Retourne la clé actuelle (c'est la même que la position dans notre cas).
-   */
-  public function key()
-  {
-    return $this->position;
-  }
-  
-  /**
-   * Déplace le curseur vers l'élément suivant.
-   */
-  public function next()
-  {
-    $this->position++;
-  }
-  
-  /**
-   * Remet la position du curseur à 0.
-   */
-  public function rewind()
-  {
-    $this->position = 0;
-  }
-  
-  /**
-   * Permet de tester si la position actuelle est valide.
-   */
-  public function valid()
-  {
-    return isset($this->tableau[$this->position]);
-  }
-}
-
-$objet = new MaClasse;
-
-foreach ($objet as $key => $value)
-{
-  echo $key, ' => ', $value, '<br />';
-}
-````
-
-### ``SeekableIterator``
-
-Cette interface hérite de l'interface ``Iterator``, on n'aura donc pas besoin d'implémenter les deux à notre classe.
-Elle ajoute une méthode à la listedes méthodes ``Iterator``: la méthode ``seek``, qui permet de placer le curseur interne à une position précise (elle demande donc un argument).
-
-```
-class MaClasse implements SeekableIterator
-{
-  private $position = 0;
-  private $tableau = ['Premier élément', 'Deuxième élément', 'Troisième élément', 'Quatrième élément', 'Cinquième élément'];
-  
-  // Retourne l'élément courant du tableau.
-
-  public function current()
-  {
-    return $this->tableau[$this->position];
-  }
-  
-
-   // Retourne la clé actuelle (c'est la même que la position dans notre cas).
-
-  public function key()
-  {
-    return $this->position;
-  }
-  
-
-   // Déplace le curseur vers l'élément suivant.
-
-  public function next()
-  {
-    $this->position++;
-  }
-  
-
-   // Remet la position du curseur à 0.
-
-  public function rewind()
-  {
-    $this->position = 0;
-  }
-  
-
-   // Déplace le curseur interne.
-
-  public function seek($position)
-  {
-    $anciennePosition = $this->position;
-    $this->position = $position;
-    
-    if (!$this->valid())
-    {
-      trigger_error('La position spécifiée n\'est pas valide', E_USER_WARNING);
-      $this->position = $anciennePosition;
-    }
-  }
-  
-
-   // Permet de tester si la position actuelle est valide.
-
-  public function valid()
-  {
-    return isset($this->tableau[$this->position]);
-  }
-}
-
-$objet = new MaClasse;
-
-foreach ($objet as $key => $value)
-{
-  echo $key, ' => ', $value, '<br />';
-}
-
-$objet->seek(2);
-echo '<br />', $objet->current();
-```
-
-
-### ``ArrayAccess``
-
-Permet de placer les crochets à la suite de l'objet, avec la clé à laquelle accéder. Il y a 4 méthodes:
-
-``offsetExists``: vérifie l'existence de la clé entre crochets lorsque l'objet est passé à la fonction ``isset`` ou ``empty``;
-``offsetGet``: on fait ``$obj['clé]``, la valeur 'clé' est donc passée à la méthode ``offsetGet``.
-``offsetSet``: méthode appelée lorsqu'on assigne une valeur à une entrée. Cette méthode reçoit donc deux arguments, la valeur de la clé et la valeur qu'on veut lui assigner.
-``offsetUnset``: appelée lorsqu'on appelle la fonction ``unset`` sur l'objet avec la valeur entre crochets. Cette méthode reçoit un argument, la valeur qui est mise entre les crochets.
-
-### ``Countable``
-
-Elle contient une méthode :``count``
-Celle-ci doit obligatoirement renvoyer un entier. Elle sert à renvoyer le nombre d'netrées dans notre tableau.
-
-```
-public function count()
-  {
-    return count($this->tableau);
-  }
-```
-
-
-## Bonnes pratiques
-
 ### L'auto-chargement des classes
 
 Pour une question d'organisation, il vaut mieux créer un fichier par classe. Par exemple, nommer le fichier Maclasse.php et on place la classe dedans. Ensuite, il suffit d'inclure le fichier:
@@ -715,3 +501,7 @@ $perso = new Personnage;
 
 ````
 
+### Surcharge (Overriding)
+
+Permet de modifier une méthode d'une classe parent dans une classe enfant.
+Par exemple, on peut surcharger la méthode __construct de la classe parent en la réécrivant dans la classe enfant et en rajoutant des instructions.
