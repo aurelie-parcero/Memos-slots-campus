@@ -33,34 +33,22 @@ Il s'agit des fonctions utilisées pour une même classe.
 Elle est précédée du mot-clé ``function`` et de la visibilité de la méthode. Les types de visibilité des méthodes sont les mêmes que les attributs. Les méthodes n'ont en général pas besoin d'être masquées à l'utilisateur, le plus souvent elles seront en ``public`` (à moins qu'on tienne absolument à ce que l'utilisateur ne puisse pas appeler cette méthode, par exemple s'il s'agit d'une fonction qui simplifie certaines tâches sur l'objet mais qui ne doit pas être appelée n'importe comment).
 ```
 class Personnage
-{
-  private $force;        
-  private $localisation; 
-        
+{   
   public function deplacer() // Une méthode qui déplacera le personnage (modifiera sa localisation).
   {
 
   }
 }
 ```
-Pour appeler une méthode d'un objet, il va falloir utiliser un opérateur : il s'agit de l'opérateur ``->`` (une flèche composée d'un tiret suivi d'un chevron fermant).
+Pour appeler une méthode d'un objet, il va falloir utiliser un opérateur : il s'agit de l'opérateur ``->``
 À gauche de cet opérateur, on place l'objet que l'on veut utiliser. 
 À droite de l'opérateur, on spécifie le nom de la méthode que l'on veut invoquer.
 
 ```
-class Personnage {
-private $force;
-private $localisation;
-
-// Nous déclarons une méthode dont le seul but est d'afficher un texte.
-public fonction parler() {
-
-echo 'Je suis un personnage!';
-    }
-}
 $perso = new Personnage; 
 $perso->parler();
 ```
+
 La dernière ligne signifie donc « va chercher l'objet ``$perso``, et invoque la méthode ``parler()`` sur cet objet ».
 
 Cet opérateur peut également servir à atteindre un attribut.
@@ -102,21 +90,14 @@ public function frapper($persoAFrapper)
 $perso1->frapper($perso2);
 ```
 
-Pour s'assurer que l'on passe bien en paramètre un objet et éviter ainsi les erreurs, il suffit de préciser dans les parenthèses le nom de la classe (typer la valeur):
-
+On peut typer la valeur demandée en paramètre, afin d'éviter les erreurs:
 ```
-class Personnage
-{
-  //...
-
   public function frapper(Personnage $persoAFrapper)
   {
     // …
   }
 }
 ```
-Grâce à ça, on est sûrs que la méthode ``frapper()`` ne sera exécutée que si le paramètre passé est de type ``Personnage``, sinon PHP interrompt tout le script. On peut donc appeler les méthodes de l'objet sans crainte qu'un autre type de variable soit passé en paramètre.
-
 
 - #### Les méthodes statiques
 
@@ -166,19 +147,12 @@ C'est une méthode dont le rôle est de renvoyer l'attribut qu'on lui demande.
 ```
 class Personnage
 {
-  private $force;
   private $degats;
         
   // Ceci est la méthode getDegats() : elle se charge de renvoyer le contenu de l'attribut $degats.
   public function getDegats()
   {
     return $this->degats;
-  }
-        
-  // Ceci est la méthode getForce() : elle se charge de renvoyer le contenu de l'attribut $force.
-  public function getForce()
-  {
-    return $this->force;
   }
 }
 ```
@@ -188,20 +162,13 @@ class Personnage
 Méthode permettant de modifier un attribut. Ces méthodes sont de la forme ``setNomDeLAttribut()``:
 
 ```
+class Personnage
+{
+  private $force;
+
 // Mutateur chargé de modifier l'attribut $force.
   public function setForce($force)
   {
-    if (!is_int($force)) // S'il ne s'agit pas d'un nombre entier.
-    {
-      trigger_error('La force d\'un personnage doit être un nombre entier', E_USER_WARNING);
-      return;
-    }
-    
-    if ($force > 100) // On vérifie bien qu'on ne souhaite pas assigner une valeur supérieure à 100.
-    {
-      trigger_error('La force d\'un personnage ne peut dépasser 100', E_USER_WARNING);
-      return;
-    }
     
     $this->force = $force;
   }
@@ -213,7 +180,7 @@ C'est une méthode écrite dans la classe, qui permet d'initialiser les attribut
 
 Il s'écrit comme ceci: ``__construct`` avec deux underscore au début.
 
-Comme son nom l'indique, le constructeur sert à construire l'objet. Il est exécuté dès la création de l'objet et par conséquent, aucune valeur ne doit être retournée.
+Il est exécuté dès la création de l'objet et par conséquent, aucune valeur ne doit être retournée.
 Une classe fonctionne très bien sans constructeur, il n'est en rien obligatoire!
 
 ```
