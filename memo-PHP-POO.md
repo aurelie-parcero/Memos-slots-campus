@@ -472,3 +472,10 @@ $perso = new Personnage;
 
 Permet de modifier une méthode d'une classe parent dans une classe enfant.
 Par exemple, on peut surcharger la méthode __construct de la classe parent en la réécrivant dans la classe enfant et en rajoutant des instructions.
+
+
+### Composer
+
+ Logiciel gestionnaire de dépendances. Il permet de déclarer et d'installer les bibliothèques dont le projet principal a besoin.
+ 
+ Composer ``install``installe toutes les bibliothèques du composer .json. Il s'agit de la commande  à lancer pour installer les dépendances d'un dépôt PHP.
