@@ -304,32 +304,6 @@ $perso = new Personnage(Personnage::FORCE_MOYENNE);
 A noter que les constantes se notent en majuscules.
 
 
-
-### L'hydratation
-
-Quand on parle d'hydratation, c'est qu'on parle d'« objet à hydrater ». Hydrater un objet, c'est tout simplement lui apporter ce dont il a besoin pour fonctionner. En d'autres termes plus précis, hydrater un objet revient à lui fournir des données correspondant à ses attributs pour qu'il assigne les valeurs souhaitées à ces derniers. L'objet aura ainsi des attributs valides et sera en lui-même valide. On dit que l'objet a ainsi été hydraté.
-
-On peut donc écrire une fonction ``hydrate()``:
-
-````
-// Un tableau de données doit être passé à la fonction (d'où le préfixe « array »).
-  public function hydrate(array $donnees)
-  {
-    foreach ($donnees as $key => $value)
-    {
-      // On récupère le nom du setter correspondant à l'attribut.
-      $method = 'set'.ucfirst($key);
-          
-      // Si le setter correspondant existe.
-      if (method_exists($this, $method))
-      {
-        // On appelle le setter.
-        $this->$method($value);
-      }
-    }
-  }
-````
-
 ### Interface
 
 Techniquement, une interface est une classe entièrement abstraite. Son rôle est de décrire un comportement à notre objet.
