@@ -1,6 +1,14 @@
 # Méthodes agiles
 ## SCRUM
 
+
+### Backlog
+ou carnet du produit.
+Il décrit, ordonne, priorise l'ensemble des taches(user story).
+Il est sous la responsabilité unique du Product Owner, mais doit également être accessible par l’équipe. 
+C’est à partir de ce document que les sprints seront planifiés. 
+Il contient la liste des fonctionnalités intervenant dans la constitution du produit, ainsi que tous les éléments nécessitant l'intervention de l'équipe projet.
+
 ### Daily Meeting
 
 L’objectif du daily meeting est de s’assurer tous ensemble que l’on va bien atteindre notre objectif. Chaque jour, il convient de mettre en commun les apports de chacun au produit ou à l'infrastructure de développement, et signaler les obstacles rencontrés. On utilise souvent les trois questions suggérées par Scrum pour structurer la réunion: 
@@ -17,11 +25,6 @@ Ces trois questions sont à l'origine une spécificité des réunions Scrum, dé
 
 C'est l’estimation des charges pour la réalisation d’une action ou d’une fonctionnalité.
 
-### Product Backlog
-ou carnet du produit.
-Il décrit, ordonne, priorise l'ensemble des taches(user story).
-Il est sous la responsabilité unique du Product Owner, mais doit également être accessible par l’équipe. 
-C’est à partir de ce document que les sprints seront planifiés.
 
 ### Product Owner
 Le Product Owner (PO) est un chef de projet en mode agile. Il est en charge de satisfaire les besoins des clients en menant à bien la livraison d’un produit de qualité.
@@ -29,6 +32,11 @@ Au sein d’une équipe SCRUM, le Product Owner fait le lien entre la partie mé
 Véritable lien de l'équipe Scrum, il joue un rôle essentiel dans l'émergence du projet.
 
 ### Release
+C'est la mise en ligne d'une version du site web. C'est une 'livraison' du produit au client.
+
+### Rétrospective
+Réunion positionnée à la fin de chaque sprint (sprint = itération) pendant laquelle l'équipe Scrum met à profit son vécu sur le sprint écoulé pour améliorer son organisation afin d'être plus efficace.
+
 
 ### Scrum Master
 Le rôle de Scrum Master est de s'assurer de l'implication de chaque membre et de les aider à franchir les différents obstacles qu'ils pourraient rencontrer. 
@@ -51,9 +59,6 @@ Permet d'organiser le déroulement et lesobjectifs du sprint qui débute.
 La sprint review a pour but de présenter le produit (soit le travail réalisé) durant le Sprint en cours. 
 On y présentera également l’état d’avancement du produit réalisé par rapport au produit imaginé.
 Afin d’être complète, elle se situe en fin de Sprint juste avant la réunion de la Sprint Retrospective.
-
-### Rétrospective
-Réunion positionnée à la fin de chaque sprint (sprint = itération) pendant laquelle l'équipe Scrum met à profit son vécu sur le sprint écoulé pour améliorer son organisation afin d'être plus efficace.
 
 ### User Story
 Le but des user stories est de formaliser le besoin de l'utilisateur. C'est la description simplifiée d'un besoin.
